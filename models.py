@@ -1,5 +1,6 @@
 import os
-from sqlalchemy import Column, String, Integer, create_engine, ForeignKey, Table
+from sqlalchemy import Column, String, Integer, DateTime, create_engine, ForeignKey, Table
+import datetime
 from flask_sqlalchemy import SQLAlchemy
 import json
 from flask_migrate import Migrate
@@ -28,13 +29,13 @@ def db_drop_and_create_all():
     db.drop_all()
     db.create_all()
 
-# there'll need to be a many-to-many relationship between movies and actors
-# this is a helper table for the relationship
-# https://docs.sqlalchemy.org/en/14/orm/basic_relationships.html#many-to-many
-movie_actor_table = Table('movie_actor_table', db.Model.metadata,
-                            Column('movie_id', Integer, ForeignKey('movies.id')),
-                            Column('actor_id', Integer, ForeignKey('actors.id')))
-
+'''
+# helper table for many-to-many relationship between movies and actors
+#https://docs.sqlalchemy.org/en/14/orm/basic_relationships.html
+movie_actor_table=Table('movie_actor_table', db.Model.metadata,
+                    Column('movie_id', Integer, ForeignKey('movies.id')),
+                    Column('actor_id', Integer, ForeignKey('actors.id')))
+'''
 
 class Movie(db.Model):
     __tablename__ = 'movies'
@@ -42,8 +43,13 @@ class Movie(db.Model):
     id = Column(Integer, primary_key=True)
     title = Column(String(80), unique=True, nullable=False)
     release_date = Column(Integer)
-    actors = db.relationship('Actor', secondary=movie_actor_table,
-                             backref='actors_list', lazy=True)
+    release_date = Column(DateTime, nullable=False,
+                          default=datetime.datetime.utcnow)
+    #actors = db.relationship('Actor', secondary=movie_actor_table,
+    #                         backref='actors_list', lazy=True)
+
+    def __repr__(self):
+        return f"<Movie {self.id} {self.title}>"
 
     def __init__(self, title, release_date):
         self.title = title
@@ -73,13 +79,15 @@ class Actor(db.Model):
 
     id = Column(Integer, primary_key=True)
     name = Column(String)
+    age = Column(Integer)
     gender = Column(String)
-    movies = db.relationship('Movie', secondary=movie_actor_table,
-                             backref='movies_list', lazy=True)
+    #movies = db.relationship('Movie', secondary=movie_actor_table,
+    #                         backref='movies_list', lazy=True)
 
     
-    def __init__(self, name, gender):
+    def __init__(self, name, age, gender):
         self.name = name
+        self.age = age
         self.gender = gender
 
     def insert(self):
@@ -97,5 +105,6 @@ class Actor(db.Model):
         return {
           'id': self.id,
           'name': self.name,
+          'age': self.age,
           'gender': self.gender,
     }

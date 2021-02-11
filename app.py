@@ -5,7 +5,7 @@ from flask_cors import CORS
 from models import setup_db, db_drop_and_create_all, Movie, Actor, db
 from auth import requires_auth, AuthError
 
-'''
+
 def create_app(test_config=None):
   # create and configure the app
   app = Flask(__name__)
@@ -13,11 +13,15 @@ def create_app(test_config=None):
   CORS(app)
   return app
 
-APP = create_app()
+app = create_app()
 '''
 app = Flask(__name__)
 setup_db(app)
-
+'''
+'''
+  Set up CORS. Allow '*' for origins.
+'''
+#CORS(app, resource={r"*":{'origins':'*'}})
 
 '''
 Use the after_request decorator to set Access-Control-Allow
@@ -28,39 +32,63 @@ def after_request(response):
   response.headers.add('Access-Control-Allowed-Methods','GET, POST, PATCH, DELETE')
   return response
 
-
+'''
+GET /movies
+- to get all existing movies
+- to check JWT and permissions
+- to return list of movies in case of success 
+    else return appropriate error code
+'''
 @app.route('/movies')
 @requires_auth('get:movies')
 def get_movies(payload):
     try:
       movies = Movie.query.all()
+      # to return 404 in case no data found
       if len(movies) == 0:
           abort(404)
+      # form a list of movies and return in response
       movies_list = [movie.format() for movie in movies]
       return jsonify({
             'success': True,
             'movies': movies_list
         }), 200
-    except:
+    except Exception:
       abort(422)
 
 
+'''
+GET /actors
+- to get all existing actors
+- to check JWT and permissions
+- to return list of actors in case of success 
+    else return appropriate error code
+'''
 @app.route('/actors')
 @requires_auth('get:actors')
 def get_actors(payload):
     try:
       actors = Actor.query.all()
+      # to return 404 in case no data found
       if len(actors) == 0:
           abort(404)
+      # form a list of actors and return in response
       actors_list = [actor.format() for actor in actors]
       return jsonify({
             'success': True,
             'actors': actors_list
         }), 200
-    except:
+    except Exception:
       abort(422)
 
 
+'''
+POST /movies
+- to add new movie to the database
+- to check JWT and permissions to add a movie
+- to return added movie in case of success 
+    else return appropriate error code
+'''
 @app.route('/movies', methods=['POST'])
 @requires_auth('post:movies')
 def add_movie(payload):
@@ -71,11 +99,16 @@ def add_movie(payload):
     if ((new_title is None) or (new_release_date is None)):
           abort(400)
 
-    movie = Movie(title=new_title,release_date=new_release_date)
+    # check to find if movie already exists
+    movie_check = Movie.query.filter(Movie.title == new_title).one_or_none()
+    if (movie_check is None):
+          abort(409)
 
+    movie = Movie(title=new_title,release_date=new_release_date)
     try:
       movie.insert()
-    except:
+      db.session.rollback()
+    except Exception:
       db.session.rollback()
       abort(422)
 
@@ -85,7 +118,13 @@ def add_movie(payload):
     }), 200
 
 
-
+'''
+POST /actors
+- to add new actors to the database
+- to check JWT and permissions to add a actor
+- to return added actor in case of success 
+    else return appropriate error code
+'''
 @app.route('/actors', methods=['POST'])
 @requires_auth('post:actors')
 def add_actor(payload):
@@ -101,7 +140,8 @@ def add_actor(payload):
 
     try:
       actor.insert()
-    except:
+    except Exception:
+      # to rollback in case of exception  
       db.session.rollback()
       abort(422)
 
@@ -111,7 +151,14 @@ def add_actor(payload):
     }), 200
 
 
-
+'''
+PATCH /movies/<id>
+- where id is movie id of existing movie
+- to update movie details to the database
+- to check JWT and permissions to update a movie
+- to return updated movie detail in case of success 
+    else return appropriate error code
+'''
 @app.route('/movies/<int:movie_id>', methods=['PATCH'])
 @requires_auth('patch:movies')
 def update_movie(payload, movie_id):
@@ -134,6 +181,7 @@ def update_movie(payload, movie_id):
     try:
         movie.update()
     except:
+      # Rollback in case of exception
       db.session.rollback()
       abort(422)
 
@@ -143,7 +191,14 @@ def update_movie(payload, movie_id):
     }), 200
 
 
-
+'''
+PATCH /actors/<id>
+- where id is actor id of existing actor
+- to update actor details to the database
+- to check JWT and permissions to update a actor
+- to return updated actor detail in case of success 
+    else return appropriate error code
+'''
 @app.route('/actors/<int:actor_id>', methods=['PATCH'])
 @requires_auth('patch:actors')
 def update_actor(payload, actor_id):
@@ -155,7 +210,7 @@ def update_actor(payload, actor_id):
     if ((name is None) or (age is None) or (gender is None)):
           abort(400)
 
-    # make sure movie exists
+    # make sure actor exists
     actor = Actor.query.filter_by(id=actor_id).first()
     if not actor:
         abort(404)
@@ -167,13 +222,77 @@ def update_actor(payload, actor_id):
     # update
     try:
         actor.update()
-    except:
+    except Exception:
+      # rollback changes in case of exception
       db.session.rollback()
       abort(422)
 
     return jsonify({
         'success': True,
         'actor': actor.format()
+    }), 200
+
+
+'''
+DELETE /movies/<id>
+- where id is movie id of existing movie
+- to delete movie details from the database
+- to check JWT and permissions to delete a movie
+- returns status code 200 and json {"success": True, "delete": id}
+    where id is the id of the deleted record
+    or appropriate status code indicating reason for failure
+'''
+@app.route('/movies/<int:movie_id>', methods=['DELETE'])
+@requires_auth('delete:movies')
+def delete_movie(payload, movie_id):
+    # make sure actor exists
+    movie = Movie.query.filter(Movie.id == movie_id).one_or_none()
+
+    if not movie:
+        abort(404)
+
+    # delete movie details
+    try:
+        movie.delete()
+    except Exception:
+        # to rollback changes in case of exception
+        db.session.rollback()
+        abort(400)
+
+    return jsonify({
+        'success': True,
+        'delete': movie_id
+    }), 200
+
+
+'''
+DELETE /actors/<id>
+- where id is actor id of existing actor
+- to delete actor details from the database
+- to check JWT and permissions to delete a actor
+- returns status code 200 and json {"success": True, "delete": id}
+    where id is the id of the deleted record
+    or appropriate status code indicating reason for failure
+'''
+@app.route('/actors/<int:actor_id>', methods=['DELETE'])
+@requires_auth('delete:actors')
+def delete_drink(payload, actor_id):
+    # make sure actor exists
+    actor = Actor.query.filter(Actor.id == actor_id).one_or_none()
+
+    if not actor:
+        abort(404)
+
+    # delete actor details from database
+    try:
+        actor.delete()
+    except Exception:
+        db.session.rollback()
+        abort(400)
+
+    return jsonify({
+        'success': True,
+        'delete': actor_id
     }), 200
 
 
@@ -190,8 +309,7 @@ def auth_error(error):
 
 
 '''
-  Create error handlers for all expected errors 
-  including 404 and 422. 
+error handler for resource not found
 '''
 @app.errorhandler(404)
 def not_found(error):
@@ -201,6 +319,9 @@ def not_found(error):
     "message": "resource not found"
   }), 404
 
+'''
+error handler for unprocessable entity
+'''
 @app.errorhandler(422)
 def unprocessable(error):
   return jsonify({
@@ -209,6 +330,9 @@ def unprocessable(error):
     "message": "unprocessable"
   }), 422
 
+'''
+error handler for bad request
+'''
 @app.errorhandler(400)
 def bad_request(error):
   return jsonify({
@@ -216,6 +340,28 @@ def bad_request(error):
     "error": 400,
     "message": "bad request"
   }), 400
+
+'''
+error handler for data conflict
+'''
+@app.errorhandler(409)
+def bad_request(error):
+  return jsonify({
+    "success": False,
+    "error": 409,
+    "message": "Conflict , title already exists"
+  }), 409
+
+'''
+error handler for Unauthorized
+'''
+@app.errorhandler(401)
+def bad_request(error):
+  return jsonify({
+    "success": False,
+    "error": 401,
+    "message": "Unauthorized access"
+  }), 401
 
 
 if __name__ == '__main__':

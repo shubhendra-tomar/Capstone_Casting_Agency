@@ -1,0 +1,330 @@
+{
+	"info": {
+		"_postman_id": "c15f4b84-1ee9-436e-ac4f-272c189698bd",
+		"name": "capstone_casting_agency",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "add movie",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ilo5a0NvWkh2S2l1RGo3eGh5MU9tWCJ9.eyJpc3MiOiJodHRwczovL3NodWJoZW5kcmEuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDYwMjQyMDc1OTY5OWI5MDA2YTQwZDhkYSIsImF1ZCI6ImNhcHN0b25lX2Nhc3RpbmdfYWdlbmN5X2FwaSIsImlhdCI6MTYxMjk4MDkwNiwiZXhwIjoxNjEyOTg4MTA2LCJhenAiOiJKdGNiVmdJRlVjWUtkdXFQTlY3MEtQbjEwaUJTSWd6NSIsInNjb3BlIjoiIiwicGVybWlzc2lvbnMiOlsiZGVsZXRlOmFjdG9ycyIsImRlbGV0ZTptb3ZpZXMiLCJnZXQ6YWN0b3JzIiwiZ2V0Om1vdmllcyIsInBhdGNoOmFjdG9ycyIsInBhdGNoOm1vdmllcyIsInBvc3Q6YWN0b3JzIiwicG9zdDptb3ZpZXMiXX0.vwDSRa-HNbv8AIley_c7zwzrEH4deMxyvykiaiO5F9n0s-NMyqTq2gDJtWnFt0pYYFxPHkiQbwRfTDU5BNSDCBTIhr7z9bPNgr6XY3iLwoSr0b9R5RVguPFM0yEYN10DJKZz3x8Zcv8SitKnfdNYgZQdcI-qWa4WKkCBK4LdKQBADZT-v-tK0QVRClQB33eyhjc2YS4UsgJW2bNquXo9HJw6kg3j_csPg7ulQPby909N_9NEow0UchAyGYlL9S8gr5vHk6almfndm16Qi-S2pcWD8dYHLUomqaCHgnfk1Fk6BdW2msJGjEnm8WOMk7QeJCMiFsuoSaCbDq5a9dy7CQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"John Wick\",\r\n    \"release_date\": \"2021-01-20 00:00:00\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/movies",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"movies"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add actor",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ilo5a0NvWkh2S2l1RGo3eGh5MU9tWCJ9.eyJpc3MiOiJodHRwczovL3NodWJoZW5kcmEuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDYwMjQyMDc1OTY5OWI5MDA2YTQwZDhkYSIsImF1ZCI6ImNhcHN0b25lX2Nhc3RpbmdfYWdlbmN5X2FwaSIsImlhdCI6MTYxMjk4MDkwNiwiZXhwIjoxNjEyOTg4MTA2LCJhenAiOiJKdGNiVmdJRlVjWUtkdXFQTlY3MEtQbjEwaUJTSWd6NSIsInNjb3BlIjoiIiwicGVybWlzc2lvbnMiOlsiZGVsZXRlOmFjdG9ycyIsImRlbGV0ZTptb3ZpZXMiLCJnZXQ6YWN0b3JzIiwiZ2V0Om1vdmllcyIsInBhdGNoOmFjdG9ycyIsInBhdGNoOm1vdmllcyIsInBvc3Q6YWN0b3JzIiwicG9zdDptb3ZpZXMiXX0.vwDSRa-HNbv8AIley_c7zwzrEH4deMxyvykiaiO5F9n0s-NMyqTq2gDJtWnFt0pYYFxPHkiQbwRfTDU5BNSDCBTIhr7z9bPNgr6XY3iLwoSr0b9R5RVguPFM0yEYN10DJKZz3x8Zcv8SitKnfdNYgZQdcI-qWa4WKkCBK4LdKQBADZT-v-tK0QVRClQB33eyhjc2YS4UsgJW2bNquXo9HJw6kg3j_csPg7ulQPby909N_9NEow0UchAyGYlL9S8gr5vHk6almfndm16Qi-S2pcWD8dYHLUomqaCHgnfk1Fk6BdW2msJGjEnm8WOMk7QeJCMiFsuoSaCbDq5a9dy7CQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Keanu Reeves\",\r\n    \"age\": \"26\",\r\n    \"gender\": \"male\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/actors",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"actors"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update movie",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ilo5a0NvWkh2S2l1RGo3eGh5MU9tWCJ9.eyJpc3MiOiJodHRwczovL3NodWJoZW5kcmEuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDYwMjQyMDBlOTY5OWI5MDA2YTQwZDg2MiIsImF1ZCI6ImNhcHN0b25lX2Nhc3RpbmdfYWdlbmN5X2FwaSIsImlhdCI6MTYxMjk4MjY4OSwiZXhwIjoxNjEyOTg5ODg5LCJhenAiOiJKdGNiVmdJRlVjWUtkdXFQTlY3MEtQbjEwaUJTSWd6NSIsInNjb3BlIjoiIiwicGVybWlzc2lvbnMiOlsiZGVsZXRlOmFjdG9ycyIsImRlbGV0ZTptb3ZpZXMiLCJnZXQ6YWN0b3JzIiwiZ2V0Om1vdmllcyIsInBhdGNoOmFjdG9ycyIsInBhdGNoOm1vdmllcyIsInBvc3Q6YWN0b3JzIl19.PbKOtyOB50lMMn6fVnIn-_ywqi0w8C49pxs4mEJkRWedFAz3grtUs62OqQggWsNSQwsnPkUy2MvFjvCw7JEmB9MnuJxJt7uJ-SyEP_orBPSq2qjNU8VYByInNWkF92OwUQ7im5KV003hW6irD9o5EV17u8s8TnkMYGmZHUXmY-vyP_HMCYXM3ZmdXo8Z0Sv-WPRh3YTKkr2SqauWi3KGpkG4vrYHBSLncqOMRgCo_e1ypIi8rWYP02rzqt3Ueg0AP8cnpcz3-UK-FfXOL7iteiQK0z9nUaHoHEES3TSEP_iKWF46ta70Uyqd46bt4zsZ3CIihmaudEbL_E7am62lJg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"John Wick 3\",\r\n    \"release_date\": \"2021-01-20\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/movies/2",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"movies",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete movie",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ilo5a0NvWkh2S2l1RGo3eGh5MU9tWCJ9.eyJpc3MiOiJodHRwczovL3NodWJoZW5kcmEuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDYwMjQyMDBlOTY5OWI5MDA2YTQwZDg2MiIsImF1ZCI6ImNhcHN0b25lX2Nhc3RpbmdfYWdlbmN5X2FwaSIsImlhdCI6MTYxMjk4MjY4OSwiZXhwIjoxNjEyOTg5ODg5LCJhenAiOiJKdGNiVmdJRlVjWUtkdXFQTlY3MEtQbjEwaUJTSWd6NSIsInNjb3BlIjoiIiwicGVybWlzc2lvbnMiOlsiZGVsZXRlOmFjdG9ycyIsImRlbGV0ZTptb3ZpZXMiLCJnZXQ6YWN0b3JzIiwiZ2V0Om1vdmllcyIsInBhdGNoOmFjdG9ycyIsInBhdGNoOm1vdmllcyIsInBvc3Q6YWN0b3JzIl19.PbKOtyOB50lMMn6fVnIn-_ywqi0w8C49pxs4mEJkRWedFAz3grtUs62OqQggWsNSQwsnPkUy2MvFjvCw7JEmB9MnuJxJt7uJ-SyEP_orBPSq2qjNU8VYByInNWkF92OwUQ7im5KV003hW6irD9o5EV17u8s8TnkMYGmZHUXmY-vyP_HMCYXM3ZmdXo8Z0Sv-WPRh3YTKkr2SqauWi3KGpkG4vrYHBSLncqOMRgCo_e1ypIi8rWYP02rzqt3Ueg0AP8cnpcz3-UK-FfXOL7iteiQK0z9nUaHoHEES3TSEP_iKWF46ta70Uyqd46bt4zsZ3CIihmaudEbL_E7am62lJg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/movies/2",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"movies",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete actor",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ilo5a0NvWkh2S2l1RGo3eGh5MU9tWCJ9.eyJpc3MiOiJodHRwczovL3NodWJoZW5kcmEuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDYwMjQyMDBlOTY5OWI5MDA2YTQwZDg2MiIsImF1ZCI6ImNhcHN0b25lX2Nhc3RpbmdfYWdlbmN5X2FwaSIsImlhdCI6MTYxMjk4MjY4OSwiZXhwIjoxNjEyOTg5ODg5LCJhenAiOiJKdGNiVmdJRlVjWUtkdXFQTlY3MEtQbjEwaUJTSWd6NSIsInNjb3BlIjoiIiwicGVybWlzc2lvbnMiOlsiZGVsZXRlOmFjdG9ycyIsImRlbGV0ZTptb3ZpZXMiLCJnZXQ6YWN0b3JzIiwiZ2V0Om1vdmllcyIsInBhdGNoOmFjdG9ycyIsInBhdGNoOm1vdmllcyIsInBvc3Q6YWN0b3JzIl19.PbKOtyOB50lMMn6fVnIn-_ywqi0w8C49pxs4mEJkRWedFAz3grtUs62OqQggWsNSQwsnPkUy2MvFjvCw7JEmB9MnuJxJt7uJ-SyEP_orBPSq2qjNU8VYByInNWkF92OwUQ7im5KV003hW6irD9o5EV17u8s8TnkMYGmZHUXmY-vyP_HMCYXM3ZmdXo8Z0Sv-WPRh3YTKkr2SqauWi3KGpkG4vrYHBSLncqOMRgCo_e1ypIi8rWYP02rzqt3Ueg0AP8cnpcz3-UK-FfXOL7iteiQK0z9nUaHoHEES3TSEP_iKWF46ta70Uyqd46bt4zsZ3CIihmaudEbL_E7am62lJg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/actors/2",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"actors",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update actor",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ilo5a0NvWkh2S2l1RGo3eGh5MU9tWCJ9.eyJpc3MiOiJodHRwczovL3NodWJoZW5kcmEuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDYwMjQyMDBlOTY5OWI5MDA2YTQwZDg2MiIsImF1ZCI6ImNhcHN0b25lX2Nhc3RpbmdfYWdlbmN5X2FwaSIsImlhdCI6MTYxMjk4MjY4OSwiZXhwIjoxNjEyOTg5ODg5LCJhenAiOiJKdGNiVmdJRlVjWUtkdXFQTlY3MEtQbjEwaUJTSWd6NSIsInNjb3BlIjoiIiwicGVybWlzc2lvbnMiOlsiZGVsZXRlOmFjdG9ycyIsImRlbGV0ZTptb3ZpZXMiLCJnZXQ6YWN0b3JzIiwiZ2V0Om1vdmllcyIsInBhdGNoOmFjdG9ycyIsInBhdGNoOm1vdmllcyIsInBvc3Q6YWN0b3JzIl19.PbKOtyOB50lMMn6fVnIn-_ywqi0w8C49pxs4mEJkRWedFAz3grtUs62OqQggWsNSQwsnPkUy2MvFjvCw7JEmB9MnuJxJt7uJ-SyEP_orBPSq2qjNU8VYByInNWkF92OwUQ7im5KV003hW6irD9o5EV17u8s8TnkMYGmZHUXmY-vyP_HMCYXM3ZmdXo8Z0Sv-WPRh3YTKkr2SqauWi3KGpkG4vrYHBSLncqOMRgCo_e1ypIi8rWYP02rzqt3Ueg0AP8cnpcz3-UK-FfXOL7iteiQK0z9nUaHoHEES3TSEP_iKWF46ta70Uyqd46bt4zsZ3CIihmaudEbL_E7am62lJg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Keanu Reeves new\",\r\n    \"age\": \"28\",\r\n    \"gender\": \"male\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/actors/2",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"actors",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get actors",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ilo5a0NvWkh2S2l1RGo3eGh5MU9tWCJ9.eyJpc3MiOiJodHRwczovL3NodWJoZW5kcmEuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDYwMjQxZjU4ZDJlMzM4MDA2ODNlODRiZCIsImF1ZCI6ImNhcHN0b25lX2Nhc3RpbmdfYWdlbmN5X2FwaSIsImlhdCI6MTYxMjk4MjM1NywiZXhwIjoxNjEyOTg5NTU3LCJhenAiOiJKdGNiVmdJRlVjWUtkdXFQTlY3MEtQbjEwaUJTSWd6NSIsInNjb3BlIjoiIiwicGVybWlzc2lvbnMiOlsiZ2V0OmFjdG9ycyIsImdldDptb3ZpZXMiXX0.PWRO5NSNfEkspGpQ7-lQ_dii8tGHCK0BXJODWnHCxJMqLps6Ik7hRuowTYMyriVZf1c0wtQBSJxRWOMWqPLHzukFiN9NZNqv9MYGB-pFUiS0Bk8HI-S3gW9WPr7u73ztrdUSDffTeoHVN_GtLfRiB7-0KcFsvjjcZTb1Vh5Isa8VXq57lo_yB0lzvUq7w2AXjB7QaahxJina8nTpn0mUE8U77FRtGl82TM0BXSlz3oOock5Zhm63W3GNhgTEqRblskzxg0MqE0WWGgg2BJkW3yZ8VVw9sWfWqux1O15jIizayZoAkps-n4NuUH_hAMJZxozcqAE_ZA16L83RaNLL_Q",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/actors",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"actors"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get movies",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ilo5a0NvWkh2S2l1RGo3eGh5MU9tWCJ9.eyJpc3MiOiJodHRwczovL3NodWJoZW5kcmEuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDYwMjQxZjU4ZDJlMzM4MDA2ODNlODRiZCIsImF1ZCI6ImNhcHN0b25lX2Nhc3RpbmdfYWdlbmN5X2FwaSIsImlhdCI6MTYxMjk4MjM1NywiZXhwIjoxNjEyOTg5NTU3LCJhenAiOiJKdGNiVmdJRlVjWUtkdXFQTlY3MEtQbjEwaUJTSWd6NSIsInNjb3BlIjoiIiwicGVybWlzc2lvbnMiOlsiZ2V0OmFjdG9ycyIsImdldDptb3ZpZXMiXX0.PWRO5NSNfEkspGpQ7-lQ_dii8tGHCK0BXJODWnHCxJMqLps6Ik7hRuowTYMyriVZf1c0wtQBSJxRWOMWqPLHzukFiN9NZNqv9MYGB-pFUiS0Bk8HI-S3gW9WPr7u73ztrdUSDffTeoHVN_GtLfRiB7-0KcFsvjjcZTb1Vh5Isa8VXq57lo_yB0lzvUq7w2AXjB7QaahxJina8nTpn0mUE8U77FRtGl82TM0BXSlz3oOock5Zhm63W3GNhgTEqRblskzxg0MqE0WWGgg2BJkW3yZ8VVw9sWfWqux1O15jIizayZoAkps-n4NuUH_hAMJZxozcqAE_ZA16L83RaNLL_Q",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/movies",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"movies"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

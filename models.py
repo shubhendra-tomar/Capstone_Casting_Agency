@@ -42,7 +42,6 @@ class Movie(db.Model):
     
     id = Column(Integer, primary_key=True)
     title = Column(String(80), unique=True, nullable=False)
-    release_date = Column(Integer)
     release_date = Column(DateTime, nullable=False,
                           default=datetime.datetime.utcnow)
     #actors = db.relationship('Actor', secondary=movie_actor_table,

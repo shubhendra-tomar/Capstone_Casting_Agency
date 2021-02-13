@@ -50,7 +50,8 @@ class CastingTestCase(unittest.TestCase):
     def setUp(self):
         """Define test variables and initialize app."""
         self.app = create_app()
-        self.app.config['TESTING'] = True  # add to fix postgres freeze error
+        # add TESTING to fix postgres freeze error
+        self.app.config['TESTING'] = True  
         self.app.config['WTF_CSRF_ENABLED'] = False
         self.app.config['DEBUG'] = True
         self.client = self.app.test_client
@@ -99,7 +100,7 @@ class CastingTestCase(unittest.TestCase):
     # 2. Use self.assertEqual to check the status code and all other
     # relevant operations.
 
-    # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     # Actor Tests
 
     # test get actors end point

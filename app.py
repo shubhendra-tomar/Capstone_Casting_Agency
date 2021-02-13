@@ -4,6 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 from models import setup_db, db_drop_and_create_all, Movie, Actor, db
 from auth import requires_auth, AuthError
+import datetime
 
 
 def create_app(test_config=None):
@@ -22,8 +23,10 @@ def create_app(test_config=None):
   '''
   @app.after_request
   def after_request(response):
-    response.headers.add('Access-Control-Allowed-Headers','Content-Type, Authorization')
-    response.headers.add('Access-Control-Allowed-Methods','GET, POST, PATCH, DELETE')
+    response.headers.add('Access-Control-Allowed-Headers',
+                              'Content-Type, Authorization')
+    response.headers.add('Access-Control-Allowed-Methods',
+                              'GET, POST, PATCH, DELETE')
     return response
 
   '''
@@ -97,6 +100,14 @@ def create_app(test_config=None):
       if movie_check:
             abort(409)
 
+      try:
+        date_obj = datetime.datetime.strptime(new_release_date, '%Y-%m-%d')
+      except ValueError:
+        raise AuthError({
+          'code': 'invalid_format',
+          'description': 'For release date use this format YYYY-MM-DD'
+        }, 400)
+          
       movie = Movie(title=new_title,release_date=new_release_date)
       try:
         movie.insert()
@@ -126,7 +137,8 @@ def create_app(test_config=None):
       new_gender = request.get_json().get('gender')
       
       # check if all fields have data
-      if ((new_name is None) or (new_age is None) or (new_gender is None)):
+      if ((new_name is None) or (new_age is None) 
+                              or (new_gender is None)):
             abort(400)
 
       actor = Actor(name=new_name, age=new_age, gender=new_gender)
@@ -171,6 +183,14 @@ def create_app(test_config=None):
           movie.title = title
       elif (release_date is not None):
           movie.release_date = release_date
+
+      try:
+          date_obj = datetime.datetime.strptime(release_date, '%Y-%m-%d')
+      except ValueError:
+          raise AuthError({
+            'code': 'invalid_format',
+            'description': 'For release date use this format YYYY-MM-DD'
+          }, 400)
 
       # update
       try:

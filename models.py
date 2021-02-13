@@ -1,5 +1,5 @@
 import os
-from sqlalchemy import Column, String, Integer, DateTime, create_engine, ForeignKey, Table
+from sqlalchemy import Column, String, Integer, DateTime, create_engine, Table
 import datetime
 from flask_sqlalchemy import SQLAlchemy
 import json
@@ -32,8 +32,8 @@ def db_drop_and_create_all():
 # helper table for many-to-many relationship between movies and actors
 #https://docs.sqlalchemy.org/en/14/orm/basic_relationships.html
 movie_actor_table=Table('movie_actor_table', db.Model.metadata,
-                    Column('movie_id', Integer, ForeignKey('movies.id')),
-                    Column('actor_id', Integer, ForeignKey('actors.id')))
+                    Column('movie_id',Integer,ForeignKey('movies.id')),
+                    Column('actor_id',Integer,ForeignKey('actors.id')))
 '''
 
 class Movie(db.Model):

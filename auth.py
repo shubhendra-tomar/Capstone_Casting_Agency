@@ -76,9 +76,9 @@ check_permissions(permission, payload) method
         permission: string permission (i.e. 'post:movie')
         payload: decoded jwt payload
 
-    it should raise an AuthError if permisions are nt included in the payload
+    it should raise an AuthError if permisions are'nt included in payload
         !!NOTE check your RBAC settings in Auth0
-    it should raise an AuthError if the requested permission string is not in
+    it should raise an AuthError if requested permission string is not in
     the payload permissions array return true otherwise
 '''
 def check_permissions(permission, payload):
@@ -145,7 +145,7 @@ def verify_decode_jwt(token):
         except jwt.JWTClaimsError:
             raise AuthError({
                 'code': 'invalid_claims',
-                'description': 'Incorrect claims. Check the audience, issuer.'
+                'description': 'Incorrect claims.Check audience, issuer.'
             }, 401)
         
         except Exception:

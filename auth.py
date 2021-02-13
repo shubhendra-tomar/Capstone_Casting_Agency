@@ -4,16 +4,17 @@ from functools import wraps
 from jose import jwt
 from urllib.request import urlopen
 import ssl
+import os
 
 
-AUTH0_DOMAIN = 'shubhendra.auth0.com'
-ALGORITHMS = ['RS256']
-API_AUDIENCE = 'capstone_casting_agency_api'
+#AUTH0_DOMAIN = 'shubhendra.auth0.com'
+#ALGORITHMS = ['RS256']
+#API_AUDIENCE = 'capstone_casting_agency_api'
 
-#Unable to implement below suggested changes due to multiple errors thrown
-#AUTH0_DOMAIN = os.environ['AUTH0_DOMAIN']
-#ALGORITHMS = os.environ['ALGORITHMS']
-#API_AUDIENCE = os.environ['API_AUDIENCE']
+#Authorization headers
+AUTH0_DOMAIN = os.environ['AUTH0_DOMAIN']
+ALGORITHMS = os.environ['ALGORITHMS']
+API_AUDIENCE = os.environ['API_AUDIENCE']
 
 ssl._create_default_https_context = ssl._create_unverified_context
 
@@ -84,7 +85,7 @@ def check_permissions(permission, payload):
     if 'permissions' not in payload:
                         abort(400)
     if permission not in payload['permissions']:
-                        abort(401)
+                        abort(403)
     return True
 
 
@@ -109,7 +110,7 @@ def verify_decode_jwt(token):
     unverified_header= jwt.get_unverified_header(token)
     rsa_key= {}
     if 'kid' not in unverified_header:
-       raise AuthError({
+        raise AuthError({
             'code': 'invalid_header',
             'description': 'Authorization malformed'
         }, 401)
@@ -177,7 +178,7 @@ def requires_auth(permission=''):
             token = get_token_auth_header()
             try:
                 payload = verify_decode_jwt(token)
-            except:
+            except Exception:
                 abort(401)
             check_permissions(permission, payload)
             return f(payload, *args, **kwargs)

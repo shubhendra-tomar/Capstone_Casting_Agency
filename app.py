@@ -2,7 +2,7 @@ import os
 from flask import Flask, request, abort, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
-from models import setup_db, db_drop_and_create_all, Movie, Actor, db
+from models import setup_db, Movie, Actor, db
 from auth import requires_auth, AuthError
 import datetime
 
@@ -42,7 +42,7 @@ def create_app(test_config=None):
       try:
         movies = Movie.query.all()
         # to return 404 in case no data found
-        if len(movies) == 0:
+        if movies is None:
             abort(404)
         # form a list of movies and return in response
         movies_list = [movie.format() for movie in movies]
@@ -67,7 +67,7 @@ def create_app(test_config=None):
       try:
         actors = Actor.query.all()
         # to return 404 in case no data found
-        if len(actors) == 0:
+        if actors is None:
             abort(404)
         # form a list of actors and return in response
         actors_list = [actor.format() for actor in actors]

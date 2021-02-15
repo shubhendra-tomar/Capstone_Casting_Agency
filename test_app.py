@@ -3,7 +3,7 @@ import unittest
 import json
 from flask_sqlalchemy import SQLAlchemy
 from app import create_app
-from models import db, db_drop_and_create_all, setup_db, Movie, Actor
+from models import db, setup_db, Movie, Actor, db_drop_and_create_all
 from auth import AuthError, requires_auth
 from sqlalchemy import Column, String, Integer, DateTime
 import logging

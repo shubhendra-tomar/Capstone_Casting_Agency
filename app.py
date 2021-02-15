@@ -30,6 +30,17 @@ def create_app(test_config=None):
     return response
 
   '''
+  basic get call to show working application
+  '''
+  @app.route('/')
+  def get_app(payload):
+        return jsonify({
+              'success': True,
+              'application': 'application is working'
+          }), 200
+
+  
+  '''
   GET /movies
   - to get all existing movies
   - to check JWT and permissions

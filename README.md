@@ -2,6 +2,11 @@
 
 The Casting Agency models a company that is responsible for creating movies and actors for those movies. You are an Executive Producer within the company and are creating a system to simplify and streamline your process.
 
+## Motivation
+
+In modern world seeing everything in digital mode motivated me to build an API to help casting process online.
+
+
 ## Casting Agency Specifications
 
 ### Models
